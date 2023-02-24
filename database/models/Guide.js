@@ -12,6 +12,18 @@ const GuideSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
     },
+    idFood: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Food",
+      },
+    ],
+    idMedicine: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Medicine",
+      },
+    ],
     content: {
       type: String,
     },
