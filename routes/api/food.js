@@ -1,9 +1,9 @@
 const express = require("express");
 
 const router = express.Router();
-const CategoryController = require("../controllers/category.controller");
+const FoodController = require("../../controllers/food.controller");
 
-router.get("/", CategoryController.getAllCategory);
+router.get("/", FoodController.getAllFood);
 // router.post("/", RoleController.createRole);
 
 module.exports = router;

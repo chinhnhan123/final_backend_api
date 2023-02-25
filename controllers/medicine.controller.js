@@ -1,0 +1,115 @@
+const MedicineService = require("../services/medicine.service");
+
+const getAllMedicine = async (req, res) => {
+  try {
+    const Medicine = await MedicineService.getAllMedicine();
+    res.send(Medicine);
+  } catch (error) {
+    console.log(
+      "🚀 ------------------------------------------------------------🚀"
+    );
+    console.log(
+      "🚀 ~ file: Medicine.controller.js:8 ~ getAllMedicine ~ error:",
+      error
+    );
+    console.log(
+      "🚀 ------------------------------------------------------------🚀"
+    );
+    res.sendStatus(500);
+  }
+};
+
+const findMedicineById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const Medicine = await MedicineService.findMedicineById(id);
+    res.send(Medicine);
+  } catch (error) {
+    console.log(
+      "🚀 -------------------------------------------------------------------------🚀"
+    );
+    console.log(
+      "🚀 ~ file: Medicine.controller.js:22 ~ findMedicineByName ~ error:",
+      error
+    );
+    console.log(
+      "🚀 -------------------------------------------------------------------------🚀"
+    );
+    res.sendStatus(500);
+  }
+};
+
+const createMedicine = async (req, res) => {
+  try {
+    if (!req.body) return res.sendStatus(400);
+    const Medicine = await MedicineService.createMedicine(req.body);
+    if (!Medicine) return res.sendStatus(500);
+    return res.status(200).send(Medicine);
+  } catch (error) {
+    console.log(
+      "🚀 ---------------------------------------------------------------------🚀"
+    );
+    console.log(
+      "🚀 ~ file: Medicine.controller.js:43 ~ createMedicine ~ error:",
+      error
+    );
+    console.log(
+      "🚀 ---------------------------------------------------------------------🚀"
+    );
+    res.sendStatus(500);
+  }
+};
+
+const deleteOneMedicine = async (req, res) => {
+  try {
+    if (!req.params.id) return res.sendStatus(400);
+    const deleteMedicine = await MedicineService.deleteOneMedicine(
+      req.params.id
+    );
+    if (!deleteMedicine) return res.sendStatus(500);
+    return res.status(200).send(deleteMedicine);
+  } catch (error) {
+    console.log(
+      "🚀 ------------------------------------------------------------------------🚀"
+    );
+    console.log(
+      "🚀 ~ file: Medicine.controller.js:64 ~ deleteOneMedicine ~ error:",
+      error
+    );
+    console.log(
+      "🚀 ------------------------------------------------------------------------🚀"
+    );
+    res.sendStatus(500);
+  }
+};
+
+const updateMedicine = async (req, res) => {
+  try {
+    if (!req.params.id) return res.sendStatus(400);
+    if (!req.body) return res.sendStatus(400);
+    const updateMedicine = await BookServices.updateMedicine(
+      req.params.id,
+      req.body
+    );
+    return res.status(200).send(updateMedicine);
+  } catch (error) {
+    console.log(
+      "🚀 ---------------------------------------------------------------------🚀"
+    );
+    console.log(
+      "🚀 ~ file: Medicine.controller.js:90 ~ updateMedicine ~ error:",
+      error
+    );
+    console.log(
+      "🚀 ---------------------------------------------------------------------🚀"
+    );
+  }
+};
+
+module.exports = {
+  createMedicine,
+  getAllMedicine,
+  updateMedicine,
+  deleteOneMedicine,
+  findMedicineById,
+};

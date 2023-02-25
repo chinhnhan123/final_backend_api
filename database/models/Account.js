@@ -21,6 +21,7 @@ const AccountSchema = new Schema(
     idUser: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      required: true,
     },
   },
   { timestamps: true }

@@ -7,10 +7,12 @@ const PigsSchema = new Schema(
     idUser: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      required: true,
     },
     idCategory: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
+      required: true,
     },
     quantity: {
       type: Number,
