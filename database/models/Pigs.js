@@ -4,9 +4,9 @@ const { Schema } = mongoose;
 
 const PigsSchema = new Schema(
   {
-    idUser: {
+    idAccount: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "Account",
       required: true,
     },
     idCategory: {

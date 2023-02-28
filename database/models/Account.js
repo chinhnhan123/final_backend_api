@@ -18,9 +18,16 @@ const AccountSchema = new Schema(
       enum: [ADMIN, FARMER, TRADER],
       required: true,
     },
-    idUser: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+    fullName: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    phoneNumber: {
+      type: Number,
       required: true,
     },
   },
