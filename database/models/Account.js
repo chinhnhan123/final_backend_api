@@ -7,6 +7,7 @@ const AccountSchema = new Schema(
   {
     userName: {
       type: String,
+      unique: true,
       required: true,
     },
     password: {
@@ -28,7 +29,12 @@ const AccountSchema = new Schema(
     },
     phoneNumber: {
       type: Number,
+      unique: true,
       required: true,
+    },
+    lockAccount: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

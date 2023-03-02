@@ -1,5 +1,5 @@
-const VACCINE = "Admin";
-const MEDICINE = "Farmer";
+const VACCINE = "Vaccine";
+const MEDICINE = "Medicine";
 const TONIC = "Tonic";
 
 module.exports = {

@@ -5,10 +5,10 @@ const MedicineController = require("../../controllers/Medicine.controller");
 
 router.get("/", MedicineController.getAllMedicine);
 
-router.post("/create", MedicineController.createMedicine);
+router.post("/", MedicineController.createMedicine);
 
-router.put("/update/:id", MedicineController.updateMedicine);
+router.put("/:id", MedicineController.updateMedicine);
 
-router.delete("/delete/:id", MedicineController.deleteOneMedicine);
+router.delete("/:id", MedicineController.deleteOneMedicine);
 
 module.exports = router;
