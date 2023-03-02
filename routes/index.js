@@ -5,6 +5,7 @@ const guide = require("./api/guide");
 const medicine = require("./api/medicine");
 const admin = require("./api/admin");
 const herd = require("./api/herd");
+const auth = require("./api/auth");
 
 function route(app) {
   app.use("/api/category", Category);
@@ -14,6 +15,7 @@ function route(app) {
   app.use("/api/medicine", medicine);
   app.use("/api/admin", admin);
   app.use("/api/herd", herd);
+  app.use("/api/auth", auth);
 }
 
 module.exports = route;

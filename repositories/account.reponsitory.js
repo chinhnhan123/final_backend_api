@@ -91,10 +91,30 @@ const updateLockAccount = async (id, data) => {
   }
 };
 
+const findAccountByPhone = async (phone) => {
+  try {
+    const result = await AccountModel.findOne({ phoneNumber: phone });
+    return result;
+  } catch (err) {
+    console.log(
+      "🚀 ------------------------------------------------------------------🚀"
+    );
+    console.log(
+      "🚀 ~ file: account.reponsitory.js:86 ~ findAccountById ~ err:",
+      err
+    );
+    console.log(
+      "🚀 ------------------------------------------------------------------🚀"
+    );
+    return err;
+  }
+};
+
 module.exports = {
   createAccount,
   getAllAccount,
   updateAccount,
   updateLockAccount,
   findAccountById,
+  findAccountByPhone,
 };
