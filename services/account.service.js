@@ -90,16 +90,16 @@ const updateLockAccount = async (id, data) => {
   }
 };
 
-const findAccountByPhone = async (phone) => {
+const findAccountByEmail = async (Email) => {
   try {
-    const result = await AccountRepository.findAccountByPhone(phone);
+    const result = await AccountRepository.findAccountByEmail(Email);
     return result;
   } catch (err) {
     console.log(
       "🚀 ----------------------------------------------------------------🚀"
     );
     console.log(
-      "🚀 ~ file: account.service.js:90 ~ findAccountByPhone ~ err:",
+      "🚀 ~ file: account.service.js:90 ~ findAccountByEmail ~ err:",
       err
     );
     console.log(
@@ -109,9 +109,9 @@ const findAccountByPhone = async (phone) => {
   }
 };
 
-const checkPasswordSer = async (phoneNumber, password) => {
+const checkPasswordSer = async (email, password) => {
   try {
-    const result = await AccountRepository.findAccountByPhone(phoneNumber);
+    const result = await AccountRepository.findAccountByEmail(email);
     const isValidPassword = await checkPassword(password, result.password);
     console.log(
       "🚀 ----------------------------------------------------------------------------------------🚀"
@@ -164,7 +164,7 @@ module.exports = {
   updateAccount,
   findAccountById,
   updateLockAccount,
-  findAccountByPhone,
+  findAccountByEmail,
   checkPasswordSer,
   createToken,
 };

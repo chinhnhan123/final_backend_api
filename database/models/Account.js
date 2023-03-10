@@ -5,11 +5,7 @@ const { Schema } = mongoose;
 
 const AccountSchema = new Schema(
   {
-    phoneNumber: {
-      type: Number,
-      unique: true,
-      required: true,
-    },
+    email: { type: String, unique: true, required: true },
     password: {
       type: String,
       required: true,
@@ -25,6 +21,11 @@ const AccountSchema = new Schema(
     },
     address: {
       type: String,
+      required: true,
+    },
+    phoneNumber: {
+      type: Number,
+      unique: true,
       required: true,
     },
     lockAccount: {

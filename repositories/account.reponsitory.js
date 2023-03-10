@@ -91,9 +91,9 @@ const updateLockAccount = async (id, data) => {
   }
 };
 
-const findAccountByPhone = async (phone) => {
+const findAccountByEmail = async (email) => {
   try {
-    const result = await AccountModel.findOne({ phoneNumber: phone });
+    const result = await AccountModel.findOne({ email: email });
     return result;
   } catch (err) {
     console.log(
@@ -116,5 +116,5 @@ module.exports = {
   updateAccount,
   updateLockAccount,
   findAccountById,
-  findAccountByPhone,
+  findAccountByEmail,
 };

@@ -2,9 +2,9 @@ const AccountService = require("../services/account.service");
 
 const register = async (req, res) => {
   try {
-    const { phoneNumber, password } = req.body;
-    if (!phoneNumber || !password) return res.status(422).send("Required !!!!");
-    const findAccount = await AccountService.findAccountByPhone(phoneNumber);
+    const { email, password } = req.body;
+    if (!email || !password) return res.status(422).send("Required !!!!");
+    const findAccount = await AccountService.findAccountByEmail(email);
     if (findAccount) return res.status(400).send("Account already exists");
     const createAccount = await AccountService.createAccount(req.body);
     if (!createAccount) return res.status(500).send("Internal server error");
@@ -23,9 +23,9 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    const { phoneNumber, password } = req.body;
-    if (!phoneNumber || !password) return res.status(422).send("Required !!!!");
-    const findAccount = await AccountService.findAccountByPhone(phoneNumber);
+    const { email, password } = req.body;
+    if (!email || !password) return res.status(422).send("Required !!!!");
+    const findAccount = await AccountService.findAccountByEmail(email);
     console.log(
       "🚀 --------------------------------------------------------------------🚀"
     );
@@ -39,12 +39,12 @@ const login = async (req, res) => {
 
     if (!findAccount) return res.status(400).send("Account does not exists");
     const payload = {
-      phoneNumber: findAccount.phoneNumber,
+      email: findAccount.email,
       fullName: findAccount.fullName,
       role: findAccount.role,
     };
     const passwordValid = await AccountService.checkPasswordSer(
-      phoneNumber,
+      email,
       password
     );
 

@@ -42,6 +42,16 @@ const findAccountById = async (req, res) => {
 const createAccount = async (req, res) => {
   try {
     if (!req.body) return res.sendStatus(400);
+    console.log(
+      "🚀 -------------------------------------------------------------------------🚀"
+    );
+    console.log(
+      "🚀 ~ file: account.controller.js:45 ~ createAccount ~ req.body:",
+      req.body
+    );
+    console.log(
+      "🚀 -------------------------------------------------------------------------🚀"
+    );
     const Account = await AccountService.createAccount(req.body);
     if (!Account) return res.sendStatus(500);
     return res.status(200).send(Account);
