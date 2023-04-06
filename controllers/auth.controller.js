@@ -24,25 +24,26 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(
+      "🚀 --------------------------------------------------------------🚀"
+    );
+    console.log(
+      "🚀 ~ file: auth.controller.js:27 ~ login ~ password:",
+      typeof password
+    );
+    console.log(
+      "🚀 --------------------------------------------------------------🚀"
+    );
     if (!email || !password) return res.status(422).send("Required !!!!");
     const findAccount = await AccountService.findAccountByEmail(email);
-    console.log(
-      "🚀 --------------------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: auth.controller.js:29 ~ login ~ findAccount:",
-      findAccount
-    );
-    console.log(
-      "🚀 --------------------------------------------------------------------🚀"
-    );
-
     if (!findAccount) return res.status(400).send("Account does not exists");
     const payload = {
+      id: findAccount._id,
       email: findAccount.email,
       fullName: findAccount.fullName,
       role: findAccount.role,
     };
+
     const passwordValid = await AccountService.checkPasswordSer(
       email,
       password
@@ -56,7 +57,7 @@ const login = async (req, res) => {
     res.cookie("AccessToken", handleToken, { httpOnly: true });
     return res
       .status(200)
-      .send({ handleToken, message: "login successful!!!!!" });
+      .send({ handleToken, payload, message: "login successful!!!!!" });
   } catch (err) {
     return err;
   }

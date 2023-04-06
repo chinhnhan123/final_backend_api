@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const ChatController = require("../../controllers/chat.controller");
 
-router.get("/", ChatController.getAllChat);
+router.get("/:conversationId", ChatController.getChat);
 
 router.post("/", ChatController.createChat);
 

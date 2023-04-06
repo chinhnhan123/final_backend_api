@@ -1,14 +1,15 @@
 const ChatService = require("../services/chat.service");
 
-const getAllChat = async (req, res) => {
+const getChat = async (req, res) => {
   try {
-    const Chat = await ChatService.getAllChat();
+    const conversationId = req.params.conversationId;
+    const Chat = await ChatService.getChat(conversationId);
     res.send(Chat);
   } catch (error) {
     console.log(
       "🚀 ------------------------------------------------------------🚀"
     );
-    console.log("🚀 ~ file: Chat.controller.js:8 ~ getAllChat ~ error:", error);
+    console.log("🚀 ~ file: Chat.controller.js:8 ~ getChat ~ error:", error);
     console.log(
       "🚀 ------------------------------------------------------------🚀"
     );
@@ -100,7 +101,7 @@ const updateChat = async (req, res) => {
 
 module.exports = {
   createChat,
-  getAllChat,
+  getChat,
   updateChat,
   deleteOneChat,
   findChatById,

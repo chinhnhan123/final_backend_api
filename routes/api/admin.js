@@ -5,6 +5,8 @@ const AccountController = require("../../controllers/account.controller");
 
 router.get("/account", AccountController.getAllAccount);
 
+router.get("/account/:id", AccountController.findAccountById);
+
 router.post("/account", AccountController.createAccount);
 
 router.put("/account/:id", AccountController.updateAccount);

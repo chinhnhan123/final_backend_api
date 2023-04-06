@@ -16,15 +16,15 @@ const createChat = async (data) => {
   }
 };
 
-const getAllChat = async () => {
+const getChat = async (conversationId) => {
   try {
-    const Chat = await ChatModel.find();
+    const Chat = await ChatModel.find({ conversationId });
     return Chat;
   } catch (err) {
     console.log(
       "🚀 ---------------------------------------------------------🚀"
     );
-    console.log("🚀 ~ file: Chat.repository.js:26 ~ getAllChat ~ err:", err);
+    console.log("🚀 ~ file: Chat.repository.js:26 ~ getChat ~ err:", err);
     console.log(
       "🚀 ---------------------------------------------------------🚀"
     );
@@ -83,7 +83,7 @@ const findChatById = async (id) => {
 
 module.exports = {
   createChat,
-  getAllChat,
+  getChat,
   updateChat,
   deleteChat,
   findChatById,

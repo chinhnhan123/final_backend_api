@@ -15,9 +15,9 @@ const createConversation = async (data) => {
   }
 };
 
-const getAllConversation = async () => {
+const getAllConversation = async (idAccount) => {
   try {
-    const result = await ConversationRepository.getAllConversation();
+    const result = await ConversationRepository.getAllConversation(idAccount);
     return result;
   } catch (err) {
     console.log(

@@ -5,12 +5,14 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors");
-
+const http = require("http");
+const socketio = require("socket.io");
 const database = require("./database/connect");
-
+const { WebSockets } = require("./utilities/WebSockets");
 const route = require("./routes/index");
 
 var app = express();
+const server = http.createServer(app);
 
 app.use(cors());
 app.use(logger("dev"));
@@ -18,7 +20,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-
+const io = socketio(server, {
+  cors: {
+    origin: "http://localhost:3000",
+  },
+});
+WebSockets(io);
 route(app);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -40,4 +47,6 @@ app.use(function (err, req, res, next) {
   await database.connectDatabase();
 })();
 
-module.exports = app;
+server.listen(process.env.PORT, () => {
+  console.log("Server is up and running on port 4000");
+});

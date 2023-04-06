@@ -2,7 +2,10 @@ const ConversationService = require("../services/Conversation.service");
 
 const getAllConversation = async (req, res) => {
   try {
-    const Conversation = await ConversationService.getAllConversation();
+    const idAccount = req.params.idAccount;
+    const Conversation = await ConversationService.getAllConversation(
+      idAccount
+    );
     res.send(Conversation);
   } catch (error) {
     console.log(

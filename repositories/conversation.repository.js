@@ -19,9 +19,11 @@ const createConversation = async (data) => {
   }
 };
 
-const getAllConversation = async () => {
+const getAllConversation = async (idAccount) => {
   try {
-    const Conversation = await ConversationModel.find();
+    const Conversation = await ConversationModel.find({
+      idAccount: { $in: [idAccount] },
+    });
     return Conversation;
   } catch (err) {
     console.log(
