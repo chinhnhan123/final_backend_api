@@ -5,13 +5,6 @@ const createFood = async (data) => {
     const Food = await FoodModel.create(data);
     return Food;
   } catch (err) {
-    console.log(
-      "🚀 --------------------------------------------------------🚀"
-    );
-    console.log("🚀 ~ file: food.repository.js:8 ~ createFood ~ err:", err);
-    console.log(
-      "🚀 --------------------------------------------------------🚀"
-    );
     return err;
   }
 };
@@ -21,13 +14,6 @@ const getAllFood = async () => {
     const Food = await FoodModel.find();
     return Food;
   } catch (err) {
-    console.log(
-      "🚀 ---------------------------------------------------------🚀"
-    );
-    console.log("🚀 ~ file: food.repository.js:26 ~ getAllFood ~ err:", err);
-    console.log(
-      "🚀 ---------------------------------------------------------🚀"
-    );
     return err;
   }
 };
@@ -37,13 +23,6 @@ const updateFood = async (id, data) => {
     const Food = await FoodModel.updateMany(id, data);
     return Food;
   } catch (err) {
-    console.log(
-      "🚀 ---------------------------------------------------------🚀"
-    );
-    console.log("🚀 ~ file: food.repository.js:40 ~ updateFood ~ err:", err);
-    console.log(
-      "🚀 ---------------------------------------------------------🚀"
-    );
     return err;
   }
 };
@@ -53,14 +32,6 @@ const deleteFood = async (id) => {
     const Food = await FoodModel.findOneAndRemove(id);
     return Food;
   } catch (err) {
-    console.log(
-      "🚀 ---------------------------------------------------------🚀"
-    );
-    console.log("🚀 ~ file: food.repository.js:50 ~ deleteFood ~ err:", err);
-    console.log(
-      "🚀 ---------------------------------------------------------🚀"
-    );
-
     return err;
   }
 };
@@ -70,13 +41,6 @@ const findFoodById = async (id) => {
     const result = await FoodModel.findById(id);
     return result;
   } catch (err) {
-    console.log(
-      "🚀 -----------------------------------------------------------🚀"
-    );
-    console.log("🚀 ~ file: food.repository.js:67 ~ findFoodById ~ err:", err);
-    console.log(
-      "🚀 -----------------------------------------------------------🚀"
-    );
     return err;
   }
 };

@@ -1,4 +1,4 @@
-const AccountModel = require("../database/models/account");
+const AccountModel = require("../database/models/Account");
 
 const createAccount = async (data) => {
   try {

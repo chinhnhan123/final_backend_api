@@ -1,7 +1,7 @@
 const express = require("express");
 
 const router = express.Router();
-const ConversationController = require("../../controllers/Conversation.controller");
+const ConversationController = require("../../controllers/conversation.controller");
 
 router.get("/:idAccount", ConversationController.getAllConversation);
 

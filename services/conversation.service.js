@@ -18,6 +18,16 @@ const createConversation = async (data) => {
 const getAllConversation = async (idAccount) => {
   try {
     const result = await ConversationRepository.getAllConversation(idAccount);
+    console.log(
+      "🚀 ----------------------------------------------------------------------------🚀"
+    );
+    console.log(
+      "🚀 ~ file: Conversation.service.js:21 ~ getAllConversation ~ result:",
+      result
+    );
+    console.log(
+      "🚀 ----------------------------------------------------------------------------🚀"
+    );
     return result;
   } catch (err) {
     console.log(

@@ -18,7 +18,7 @@ const MedicineSchema = new Schema(
       type: String,
       required: true,
     },
-    Instruction: {
+    instruction: {
       type: String,
       required: true,
     },

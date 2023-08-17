@@ -1,4 +1,5 @@
 const MedicineService = require("../services/medicine.service");
+const handleUploadImage = require("../utilities/uploadImage");
 
 const getAllMedicine = async (req, res) => {
   try {
@@ -42,20 +43,23 @@ const findMedicineById = async (req, res) => {
 const createMedicine = async (req, res) => {
   try {
     if (!req.body) return res.sendStatus(400);
-    const Medicine = await MedicineService.createMedicine(req.body);
+    const { nameMedicine, types, instruction, description } = req.body;
+    let img = "";
+    if (req?.file?.path) {
+      img = await handleUploadImage(req.file.path);
+    }
+    const payload = {
+      nameMedicine,
+      types,
+      instruction,
+      description,
+      urlImage: img,
+    };
+
+    const Medicine = await MedicineService.createMedicine(payload);
     if (!Medicine) return res.sendStatus(500);
     return res.status(200).send(Medicine);
   } catch (error) {
-    console.log(
-      "🚀 ---------------------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: Medicine.controller.js:43 ~ createMedicine ~ error:",
-      error
-    );
-    console.log(
-      "🚀 ---------------------------------------------------------------------🚀"
-    );
     res.sendStatus(500);
   }
 };

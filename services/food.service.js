@@ -5,10 +5,6 @@ const createFood = async (data) => {
     const result = await FoodRepository.createFood(data);
     return result;
   } catch (err) {
-    console.log("🚀 -----------------------------------------------------🚀");
-    console.log("🚀 ~ file: food.service.js:8 ~ createFood ~ err:", err);
-    console.log("🚀 -----------------------------------------------------🚀");
-
     return err;
   }
 };
@@ -18,13 +14,6 @@ const getAllFood = async () => {
     const result = await FoodRepository.getAllFood();
     return result;
   } catch (err) {
-    console.log(
-      "🚀 --------------------------------------------------------------🚀"
-    );
-    console.log("🚀 ~ file: Food.service.js:27 ~ getAllFood ~ err:", err);
-    console.log(
-      "🚀 --------------------------------------------------------------🚀"
-    );
     return err;
   }
 };

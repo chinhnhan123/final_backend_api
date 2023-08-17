@@ -18,7 +18,26 @@ const createGuide = async (data) => {
 
 const getAllGuide = async () => {
   try {
-    const Guide = await GuideModel.find();
+    const Guide = await GuideModel.find().populate([
+      {
+        path: "idCategory",
+        select: "_id nameCategory",
+      },
+      {
+        path: "idStage",
+        select: "_id nameStage",
+      },
+      {
+        path: "idFood",
+        select: "_id nameFood",
+      },
+      {
+        path: "idMedicine",
+        select: "_id nameMedicine",
+      },
+    ]);
+
+    console.log(Guide);
     return Guide;
   } catch (err) {
     console.log(

@@ -3,8 +3,19 @@ const ConversationService = require("../services/Conversation.service");
 const getAllConversation = async (req, res) => {
   try {
     const idAccount = req.params.idAccount;
+
     const Conversation = await ConversationService.getAllConversation(
       idAccount
+    );
+    console.log(
+      "🚀 ------------------------------------------------------------------------------------------🚀"
+    );
+    console.log(
+      "🚀 ~ file: conversation.controller.js:9 ~ getAllConversation ~ Conversation:",
+      Conversation
+    );
+    console.log(
+      "🚀 ------------------------------------------------------------------------------------------🚀"
     );
     res.send(Conversation);
   } catch (error) {
