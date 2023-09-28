@@ -34,7 +34,7 @@ const getChat = async (conversationId) => {
 
 const updateChat = async (id, data) => {
   try {
-    const Chat = await ChatModel.updateMany(id, data);
+    const Chat = await ChatModel.updateMany({ _id: id }, data);
     return Chat;
   } catch (err) {
     console.log(
@@ -50,7 +50,7 @@ const updateChat = async (id, data) => {
 
 const deleteChat = async (id) => {
   try {
-    const Chat = await ChatModel.findOneAndRemove(id);
+    const Chat = await ChatModel.findOneAndRemove({ _id: id });
     return Chat;
   } catch (err) {
     console.log(
@@ -67,7 +67,7 @@ const deleteChat = async (id) => {
 
 const findChatById = async (id) => {
   try {
-    const result = await ChatModel.findById(id);
+    const result = await ChatModel.findById({ _id: id });
     return result;
   } catch (err) {
     console.log(

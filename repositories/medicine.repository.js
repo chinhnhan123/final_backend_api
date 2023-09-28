@@ -40,7 +40,7 @@ const getAllMedicine = async () => {
 
 const updateMedicine = async (id, data) => {
   try {
-    const Medicine = await MedicineModel.updateMany(id, data);
+    const Medicine = await MedicineModel.updateMany({ _id: id }, data);
     return Medicine;
   } catch (err) {
     console.log(
@@ -59,7 +59,7 @@ const updateMedicine = async (id, data) => {
 
 const deleteMedicine = async (id) => {
   try {
-    const Medicine = await MedicineModel.findOneAndRemove(id);
+    const Medicine = await MedicineModel.findOneAndRemove({ _id: id });
     return Medicine;
   } catch (err) {
     console.log(
@@ -79,7 +79,7 @@ const deleteMedicine = async (id) => {
 
 const findMedicineById = async (id) => {
   try {
-    const result = await MedicineModel.findById(id);
+    const result = await MedicineModel.findById({ _id: id });
     return result;
   } catch (err) {
     console.log(

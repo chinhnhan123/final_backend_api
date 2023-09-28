@@ -89,11 +89,25 @@ const deleteOneMedicine = async (req, res) => {
 
 const updateMedicine = async (req, res) => {
   try {
-    if (!req.params.id) return res.sendStatus(400);
-    if (!req.body) return res.sendStatus(400);
-    const updateMedicine = await BookServices.updateMedicine(
+    if (!req.params.id || !req.body) return res.sendStatus(400);
+
+    const { nameMedicine, types, instruction, description } = req.body;
+    let img = "";
+    if (req?.file?.path) {
+      img = await handleUploadImage(req.file.path);
+    } else {
+      img = req.body.img;
+    }
+    const payload = {
+      nameMedicine,
+      types,
+      instruction,
+      description,
+      urlImage: img,
+    };
+    const updateMedicine = await MedicineService.updateMedicine(
       req.params.id,
-      req.body
+      payload
     );
     return res.status(200).send(updateMedicine);
   } catch (error) {

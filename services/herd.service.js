@@ -17,13 +17,17 @@ const getAllHerd = async () => {
     const result = await HerdRepository.getAllHerd();
     return result;
   } catch (err) {
-    console.log(
-      "🚀 --------------------------------------------------------------🚀"
-    );
-    console.log("🚀 ~ file: Herd.service.js:27 ~ getAllHerd ~ err:", err);
-    console.log(
-      "🚀 --------------------------------------------------------------🚀"
-    );
+    console.log("🚀 ~ file: Herd.service.js:19 ~ err:", err);
+    return err;
+  }
+};
+
+const getAllHerdByAccountId = async (idAccount) => {
+  try {
+    const result = await HerdRepository.getAllHerdByAccountId(idAccount);
+    return result;
+  } catch (err) {
+    console.log("🚀 ~ file: Herd.service.js:19 ~ err:", err);
     return err;
   }
 };
@@ -33,13 +37,6 @@ const updateHerd = async (id, data) => {
     const result = await HerdRepository.updateHerd(id, data);
     return result;
   } catch (err) {
-    console.log(
-      "🚀 --------------------------------------------------------------🚀"
-    );
-    console.log("🚀 ~ file: Herd.service.js:46 ~ updateHerd ~ err:", err);
-    console.log(
-      "🚀 --------------------------------------------------------------🚀"
-    );
     return err;
   }
 };
@@ -49,13 +46,7 @@ const deleteOneHerd = async (id) => {
     const result = await HerdRepository.deleteHerd(id);
     return result;
   } catch (err) {
-    console.log(
-      "🚀 -----------------------------------------------------------------🚀"
-    );
-    console.log("🚀 ~ file: Herd.service.js:58 ~ deleteOneHerd ~ err:", err);
-    console.log(
-      "🚀 -----------------------------------------------------------------🚀"
-    );
+    console.log("🚀 ~ file: herd.service.js:45 ~ err:", err);
     return err;
   }
 };
@@ -65,21 +56,16 @@ const findHerdById = async (id) => {
     const result = await HerdRepository.findHerdById(id);
     return result;
   } catch (err) {
-    console.log(
-      "🚀 ------------------------------------------------------------------🚀"
-    );
-    console.log("🚀 ~ file: Herd.service.js:84 ~ findHerdById ~ err:", err);
-    console.log(
-      "🚀 ------------------------------------------------------------------🚀"
-    );
+    console.log("🚀 ~ file: herd.service.js:55 ~ err:", err);
     return err;
   }
 };
 
 module.exports = {
   createHerd,
-  getAllHerd,
+  getAllHerdByAccountId,
   updateHerd,
   deleteOneHerd,
   findHerdById,
+  getAllHerd,
 };

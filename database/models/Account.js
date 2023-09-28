@@ -24,7 +24,7 @@ const AccountSchema = new Schema(
       required: true,
     },
     phoneNumber: {
-      type: Number,
+      type: String,
       unique: true,
       required: true,
     },

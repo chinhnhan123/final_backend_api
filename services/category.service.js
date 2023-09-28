@@ -25,15 +25,28 @@ const getAllCategory = async () => {
     return result;
   } catch (err) {
     console.log(
-      "🚀 --------------------------------------------------------------🚀"
-    );
-    console.log(
       "🚀 ~ file: category.service.js:27 ~ getAllCategory ~ err:",
       err
     );
-    console.log(
-      "🚀 --------------------------------------------------------------🚀"
-    );
+
+    return err;
+  }
+};
+
+const getCategoryInGuide = async () => {
+  try {
+    const result = await CategoryRepository.getCategoryInGuide();
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const getAllCategoriesNotInGuide = async () => {
+  try {
+    const result = await CategoryRepository.getAllCategoriesNotInGuide();
+    return result;
+  } catch (err) {
     return err;
   }
 };
@@ -44,15 +57,10 @@ const updateCategory = async (id, data) => {
     return result;
   } catch (err) {
     console.log(
-      "🚀 --------------------------------------------------------------🚀"
-    );
-    console.log(
       "🚀 ~ file: category.service.js:46 ~ updateCategory ~ err:",
       err
     );
-    console.log(
-      "🚀 --------------------------------------------------------------🚀"
-    );
+
     return err;
   }
 };
@@ -76,16 +84,16 @@ const deleteOneCategory = async (id) => {
   }
 };
 
-const findCategoryByName = async (name) => {
+const findCategoryById = async (id) => {
   try {
-    const result = await CategoryRepository.findCategoryByName(name);
+    const result = await CategoryRepository.findCategoryById(id);
     return result;
   } catch (err) {
     console.log(
       "🚀 ------------------------------------------------------------------🚀"
     );
     console.log(
-      "🚀 ~ file: category.service.js:84 ~ findCategoryByName ~ err:",
+      "🚀 ~ file: category.service.js:84 ~ findCategoryById ~ err:",
       err
     );
     console.log(
@@ -100,5 +108,7 @@ module.exports = {
   getAllCategory,
   updateCategory,
   deleteOneCategory,
-  findCategoryByName,
+  findCategoryById,
+  getCategoryInGuide,
+  getAllCategoriesNotInGuide,
 };

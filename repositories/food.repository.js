@@ -20,7 +20,7 @@ const getAllFood = async () => {
 
 const updateFood = async (id, data) => {
   try {
-    const Food = await FoodModel.updateMany(id, data);
+    const Food = await FoodModel.updateMany({ _id: id }, data);
     return Food;
   } catch (err) {
     return err;
@@ -29,7 +29,7 @@ const updateFood = async (id, data) => {
 
 const deleteFood = async (id) => {
   try {
-    const Food = await FoodModel.findOneAndRemove(id);
+    const Food = await FoodModel.findOneAndRemove({ _id: id });
     return Food;
   } catch (err) {
     return err;
@@ -38,7 +38,7 @@ const deleteFood = async (id) => {
 
 const findFoodById = async (id) => {
   try {
-    const result = await FoodModel.findById(id);
+    const result = await FoodModel.findById({ _id: id });
     return result;
   } catch (err) {
     return err;

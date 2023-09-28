@@ -42,7 +42,7 @@ const getAllConversation = async (idAccount) => {
 
 const updateConversation = async (id, data) => {
   try {
-    const Conversation = await ConversationModel.updateMany(id, data);
+    const Conversation = await ConversationModel.updateMany({ _id: id }, data);
     return Conversation;
   } catch (err) {
     console.log(
@@ -61,7 +61,7 @@ const updateConversation = async (id, data) => {
 
 const deleteConversation = async (id) => {
   try {
-    const Conversation = await ConversationModel.findOneAndRemove(id);
+    const Conversation = await ConversationModel.findOneAndRemove({ _id: id });
     return Conversation;
   } catch (err) {
     console.log(
@@ -81,7 +81,7 @@ const deleteConversation = async (id) => {
 
 const findConversationById = async (id) => {
   try {
-    const result = await ConversationModel.findById(id);
+    const result = await ConversationModel.findById({ _id: id });
     return result;
   } catch (err) {
     console.log(

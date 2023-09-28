@@ -9,6 +9,10 @@ const PigsSchema = new Schema(
       ref: "Account",
       required: true,
     },
+    name: {
+      type: String,
+      required: true,
+    },
     idCategory: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
@@ -18,6 +22,7 @@ const PigsSchema = new Schema(
       type: Number,
       required: true,
     },
+    urlImage: String,
   },
   { timestamps: true }
 );

@@ -1,17 +1,23 @@
 const HerdService = require("../services/herd.service");
+const handleUploadImage = require("../utilities/uploadImage");
 
 const getAllHerd = async (req, res) => {
   try {
     const Herd = await HerdService.getAllHerd();
     res.send(Herd);
   } catch (error) {
-    console.log(
-      "🚀 ------------------------------------------------------------🚀"
-    );
-    console.log("🚀 ~ file: Herd.controller.js:8 ~ getAllHerd ~ error:", error);
-    console.log(
-      "🚀 ------------------------------------------------------------🚀"
-    );
+    console.log("🚀 ~ file: Herd.controller.js:9 ~ error:", error);
+    res.sendStatus(500);
+  }
+};
+
+const getAllHerdByAccountId = async (req, res) => {
+  try {
+    const idAccount = req.params.idAccount;
+    const Herd = await HerdService.getAllHerdByAccountId(idAccount);
+    res.send(Herd);
+  } catch (error) {
+    console.log("🚀 ~ file: Herd.controller.js:9 ~ error:", error);
     res.sendStatus(500);
   }
 };
@@ -22,16 +28,7 @@ const findHerdById = async (req, res) => {
     const Herd = await HerdService.findHerdById(id);
     res.send(Herd);
   } catch (error) {
-    console.log(
-      "🚀 -------------------------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: Herd.controller.js:22 ~ findHerdByName ~ error:",
-      error
-    );
-    console.log(
-      "🚀 -------------------------------------------------------------------------🚀"
-    );
+    console.log("🚀 ~ file: Herd.controller.js:26 ~ error:", error);
     res.sendStatus(500);
   }
 };
@@ -39,20 +36,23 @@ const findHerdById = async (req, res) => {
 const createHerd = async (req, res) => {
   try {
     if (!req.body) return res.sendStatus(400);
-    const Herd = await HerdService.createHerd(req.body);
+    const { name, idCategory, quantity, idAccount } = req.body;
+    let img = "";
+    if (req?.file?.path) {
+      img = await handleUploadImage(req.file.path);
+    }
+    const payload = {
+      name,
+      idCategory,
+      quantity,
+      idAccount,
+      urlImage: img,
+    };
+    const Herd = await HerdService.createHerd(payload);
     if (!Herd) return res.sendStatus(500);
     return res.status(200).send(Herd);
   } catch (error) {
-    console.log(
-      "🚀 ---------------------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: Herd.controller.js:43 ~ createHerd ~ error:",
-      error
-    );
-    console.log(
-      "🚀 ---------------------------------------------------------------------🚀"
-    );
+    console.log("🚀 ~ file: Herd.controller.js:44 ~ error:", error);
     res.sendStatus(500);
   }
 };
@@ -64,16 +64,7 @@ const deleteOneHerd = async (req, res) => {
     if (!deleteHerd) return res.sendStatus(500);
     return res.status(200).send(deleteHerd);
   } catch (error) {
-    console.log(
-      "🚀 ------------------------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: Herd.controller.js:64 ~ deleteOneHerd ~ error:",
-      error
-    );
-    console.log(
-      "🚀 ------------------------------------------------------------------------🚀"
-    );
+    console.log("🚀 ~ file: Herd.controller.js:56 ~ error:", error);
     res.sendStatus(500);
   }
 };
@@ -82,26 +73,33 @@ const updateHerd = async (req, res) => {
   try {
     if (!req.params.id) return res.sendStatus(400);
     if (!req.body) return res.sendStatus(400);
-    const updateHerd = await BookServices.updateHerd(req.params.id, req.body);
+    const { name, idCategory, quantity, idAccount } = req.body;
+    let img = "";
+    if (req?.file?.path) {
+      img = await handleUploadImage(req.file.path);
+    } else {
+      img = req.body.img;
+    }
+    const payload = {
+      name,
+      idCategory,
+      quantity,
+      idAccount,
+      urlImage: img,
+    };
+    const updateHerd = await HerdService.updateHerd(req.params.id, payload);
     return res.status(200).send(updateHerd);
   } catch (error) {
-    console.log(
-      "🚀 ---------------------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: Herd.controller.js:90 ~ updateHerd ~ error:",
-      error
-    );
-    console.log(
-      "🚀 ---------------------------------------------------------------------🚀"
-    );
+    console.log("🚀 ~ file: Herd.controller.js:68 ~ error:", error);
+    res.sendStatus(500);
   }
 };
 
 module.exports = {
   createHerd,
-  getAllHerd,
+  getAllHerdByAccountId,
   updateHerd,
   deleteOneHerd,
   findHerdById,
+  getAllHerd,
 };

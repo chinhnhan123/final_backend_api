@@ -47,14 +47,34 @@ const createFood = async (req, res) => {
     return res.status(200).send(Food);
   } catch (error) {
     console.log(
-      "🚀 -------------------------------------------------------------🚀"
-    );
-    console.log(
       "🚀 ~ file: food.controller.js:67 ~ createFood ~ error:",
       error
     );
+    res.sendStatus(500);
+  }
+};
+
+const updateFood = async (req, res) => {
+  try {
+    if (!req.params.id || !req.body) return res.sendStatus(400);
+    const { nameFood, description } = req.body;
+    let img = "";
+    if (req?.file?.path) {
+      img = await handleUploadImage(req.file.path);
+    } else {
+      img = req.body.img;
+    }
+    const payload = {
+      nameFood,
+      description,
+      urlImage: img,
+    };
+    const updateFood = await FoodService.updateFood(req.params.id, payload);
+    return res.status(200).send(updateFood);
+  } catch (error) {
     console.log(
-      "🚀 -------------------------------------------------------------🚀"
+      "🚀 ~ file: food.controller.js:73 ~ updateFood ~ error:",
+      error
     );
     res.sendStatus(500);
   }
@@ -66,17 +86,6 @@ const deleteOneFood = async (req, res) => {
     const deleteFood = await FoodService.deleteOneFood(req.params.id);
     if (!deleteFood) return res.sendStatus(500);
     return res.status(200).send(deleteFood);
-  } catch (error) {
-    res.sendStatus(500);
-  }
-};
-
-const updateFood = async (req, res) => {
-  try {
-    if (!req.params.id) return res.sendStatus(400);
-    if (!req.body) return res.sendStatus(400);
-    const updateFood = await BookServices.updateFood(req.params.id, req.body);
-    return res.status(200).send(updateFood);
   } catch (error) {
     res.sendStatus(500);
   }

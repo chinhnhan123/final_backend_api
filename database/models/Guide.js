@@ -28,7 +28,7 @@ const GuideSchema = new Schema(
         required: true,
       },
     ],
-    content: {
+    notes: {
       type: String,
       required: true,
     },

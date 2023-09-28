@@ -4,6 +4,10 @@ const { Schema } = mongoose;
 
 const StageSchema = new Schema(
   {
+    idStage: {
+      type: Number,
+      required: true,
+    },
     nameStage: {
       type: String,
       required: true,

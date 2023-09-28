@@ -5,52 +5,46 @@ const createHerd = async (data) => {
     const Herd = await HerdModel.create(data);
     return Herd;
   } catch (err) {
-    console.log(
-      "🚀 --------------------------------------------------------🚀"
-    );
-    console.log("🚀 ~ file: Herd.repository.js:8 ~ createHerd ~ err:", err);
-    console.log(
-      "🚀 --------------------------------------------------------🚀"
-    );
+    console.log("🚀 ~ file: herd.repository.js:9 ~ err:", err);
     return err;
   }
 };
 
 const getAllHerd = async () => {
   try {
-    const Herd = await HerdModel.find();
+    const Herd = await HerdModel.find().populate("idAccount idCategory");
     return Herd;
   } catch (err) {
-    console.log(
-      "🚀 ---------------------------------------------------------🚀"
+    console.log("🚀 ~ file: herd.repository.js:19 ~ err:", err);
+    return err;
+  }
+};
+
+const getAllHerdByAccountId = async (idAccount) => {
+  try {
+    const Herd = await HerdModel.find({ idAccount: idAccount }).populate(
+      "idAccount idCategory"
     );
-    console.log("🚀 ~ file: Herd.repository.js:26 ~ getAllHerd ~ err:", err);
-    console.log(
-      "🚀 ---------------------------------------------------------🚀"
-    );
+    return Herd;
+  } catch (err) {
+    console.log("🚀 ~ file: herd.repository.js:19 ~ err:", err);
     return err;
   }
 };
 
 const updateHerd = async (id, data) => {
   try {
-    const Herd = await HerdModel.updateMany(id, data);
+    const Herd = await HerdModel.updateMany({ _id: id }, data);
     return Herd;
   } catch (err) {
-    console.log(
-      "🚀 ---------------------------------------------------------🚀"
-    );
-    console.log("🚀 ~ file: Herd.repository.js:40 ~ updateHerd ~ err:", err);
-    console.log(
-      "🚀 ---------------------------------------------------------🚀"
-    );
+    console.log("🚀 ~ file: herd.repository.js:29 ~ err:", err);
     return err;
   }
 };
 
 const deleteHerd = async (id) => {
   try {
-    const Herd = await HerdModel.findOneAndRemove(id);
+    const Herd = await HerdModel.findOneAndRemove({ _id: id });
     return Herd;
   } catch (err) {
     console.log(
@@ -65,29 +59,21 @@ const deleteHerd = async (id) => {
   }
 };
 
-const findHerdByIdAccount = async (id) => {
+const findHerdById = async (id) => {
   try {
-    const result = await HerdModel.findById(id);
+    const result = await HerdModel.findById({ _id: id }).populate("idCategory");
     return result;
   } catch (err) {
-    console.log(
-      "🚀 ------------------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: Herd.repository.js:73 ~ findHerdByIdAccount ~ err:",
-      err
-    );
-    console.log(
-      "🚀 ------------------------------------------------------------------🚀"
-    );
+    console.log("🚀 ~ file: herd.repository.js:56 ~ err:", err);
     return err;
   }
 };
 
 module.exports = {
   createHerd,
-  getAllHerd,
+  getAllHerdByAccountId,
   updateHerd,
   deleteHerd,
-  findHerdByIdAccount,
+  findHerdById,
+  getAllHerd,
 };

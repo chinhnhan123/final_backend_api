@@ -7,9 +7,12 @@ const upload = multer({ dest: "public/uploads/" });
 
 router.get("/", FoodController.getAllFood);
 
+router.get("/:id", FoodController.findFoodById);
+
 router.post("/", upload.single("file"), FoodController.createFood);
 
-router.put("/:id", FoodController.updateFood);
+router.patch("/:id", upload.single("file"), FoodController.updateFood);
 
 router.delete("/:id", FoodController.deleteOneFood);
+
 module.exports = router;

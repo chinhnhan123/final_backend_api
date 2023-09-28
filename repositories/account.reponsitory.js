@@ -5,16 +5,6 @@ const createAccount = async (data) => {
     const Account = await AccountModel.create(data);
     return Account;
   } catch (err) {
-    console.log(
-      "🚀 ---------------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: account.reponsitory.js:8 ~ createAccount ~ err:",
-      err
-    );
-    console.log(
-      "🚀 ---------------------------------------------------------------🚀"
-    );
     return err;
   }
 };
@@ -25,17 +15,6 @@ const getAllAccount = async () => {
     // .sort({ createdAt: -1 });
     return Account;
   } catch (err) {
-    console.log(
-      "🚀 ----------------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: account.reponsitory.js:28 ~ getAllAccount ~ err:",
-      err
-    );
-    console.log(
-      "🚀 ----------------------------------------------------------------🚀"
-    );
-
     return err;
   }
 };
@@ -46,14 +25,8 @@ const updateAccount = async (id, data) => {
     return Account;
   } catch (err) {
     console.log(
-      "🚀 ----------------------------------------------------------------🚀"
-    );
-    console.log(
       "🚀 ~ file: account.reponsitory.js:48 ~ updateAccount ~ err:",
       err
-    );
-    console.log(
-      "🚀 ----------------------------------------------------------------🚀"
     );
     return err;
   }
@@ -65,28 +38,23 @@ const findAccountById = async (id) => {
     return result;
   } catch (err) {
     console.log(
-      "🚀 ------------------------------------------------------------------🚀"
-    );
-    console.log(
       "🚀 ~ file: account.reponsitory.js:86 ~ findAccountById ~ err:",
       err
     );
-    console.log(
-      "🚀 ------------------------------------------------------------------🚀"
-    );
-
     return err;
   }
 };
 
 const updateLockAccount = async (id, data) => {
   try {
+    console.log("🚀 ~ file: account.reponsitory.js:54 ~ Account:", id);
     const Account = await AccountModel.updateOne(
       { _id: id },
       { $set: { lockAccount: data } }
     );
     return Account;
   } catch (err) {
+    // console.log("🚀 ~ file: account.reponsitory.js:58 ~ err:", err);
     return err;
   }
 };
@@ -97,14 +65,8 @@ const findAccountByEmail = async (email) => {
     return result;
   } catch (err) {
     console.log(
-      "🚀 ------------------------------------------------------------------🚀"
-    );
-    console.log(
       "🚀 ~ file: account.reponsitory.js:86 ~ findAccountById ~ err:",
       err
-    );
-    console.log(
-      "🚀 ------------------------------------------------------------------🚀"
     );
     return err;
   }

@@ -13,7 +13,7 @@ const getChat = async (req, res) => {
     console.log(
       "🚀 ------------------------------------------------------------🚀"
     );
-    res.sendStatus(500);
+    throw res.sendStatus(500);
   }
 };
 

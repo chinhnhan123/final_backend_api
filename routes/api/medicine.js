@@ -7,9 +7,11 @@ const upload = multer({ dest: "public/uploads/" });
 
 router.get("/", MedicineController.getAllMedicine);
 
+router.get("/:id", MedicineController.findMedicineById);
+
 router.post("/", upload.single("file"), MedicineController.createMedicine);
 
-router.put("/:id", MedicineController.updateMedicine);
+router.put("/:id", upload.single("file"), MedicineController.updateMedicine);
 
 router.delete("/:id", MedicineController.deleteOneMedicine);
 

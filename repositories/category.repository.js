@@ -1,4 +1,5 @@
 const CategoryModel = require("../database/models/Category");
+const GuideRepository = require("../repositories/guide.repository");
 
 const createCategory = async (data) => {
   try {
@@ -24,9 +25,47 @@ const getAllCategory = async () => {
   }
 };
 
+const getCategoryInGuide = async () => {
+  try {
+    const categoryInGuideId = await GuideRepository.getAllCategoryInGuide();
+    console.log(
+      "🚀 ~ file: category.repository.js:31 ~ categoryInGuide:",
+      categoryInGuideId
+    );
+    const category = await CategoryModel.find({ _id: categoryInGuideId });
+    return category;
+  } catch (err) {
+    console.log(
+      "🚀 ~ file: category.repository.js:19 ~ getAllCategory ~ err:",
+      err
+    );
+    return err;
+  }
+};
+
+const getAllCategoriesNotInGuide = async () => {
+  try {
+    const categoryInGuideId = await GuideRepository.getAllCategoryInGuide();
+    console.log(
+      "🚀 ~ file: category.repository.js:31 ~ categoryInGuide:",
+      categoryInGuideId
+    );
+    const category = await CategoryModel.find({
+      _id: { $nin: categoryInGuideId },
+    });
+    return category;
+  } catch (err) {
+    console.log(
+      "🚀 ~ file: category.repository.js:19 ~ getAllCategory ~ err:",
+      err
+    );
+    return err;
+  }
+};
+
 const updateCategory = async (id, data) => {
   try {
-    const category = await CategoryModel.updateMany(id, data);
+    const category = await CategoryModel.updateMany({ _id: id }, data);
     return category;
   } catch (err) {
     console.log(
@@ -46,7 +85,7 @@ const updateCategory = async (id, data) => {
 
 const deleteCategory = async (id) => {
   try {
-    const category = await CategoryModel.findOneAndRemove(id);
+    const category = await CategoryModel.findOneAndRemove({ _id: id });
     return category;
   } catch (err) {
     console.log(
@@ -63,9 +102,9 @@ const deleteCategory = async (id) => {
   }
 };
 
-const findCategoryByName = async (name) => {
+const findCategoryById = async (id) => {
   try {
-    const result = await CategoryModel.findOne({ nameCategory: name });
+    const result = await CategoryModel.findOne({ _id: id });
     return result;
   } catch (err) {
     return err;
@@ -77,5 +116,7 @@ module.exports = {
   getAllCategory,
   updateCategory,
   deleteCategory,
-  findCategoryByName,
+  findCategoryById,
+  getCategoryInGuide,
+  getAllCategoriesNotInGuide,
 };

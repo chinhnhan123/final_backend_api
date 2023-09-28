@@ -6,15 +6,10 @@ const getAllAccount = async (req, res) => {
     res.status(200).send(Account);
   } catch (error) {
     console.log(
-      "🚀 ------------------------------------------------------------🚀"
-    );
-    console.log(
       "🚀 ~ file: Account.controller.js:8 ~ getAllAccount ~ error:",
       error
     );
-    console.log(
-      "🚀 ------------------------------------------------------------🚀"
-    );
+
     res.sendStatus(500);
   }
 };
@@ -26,15 +21,10 @@ const findAccountById = async (req, res) => {
     res.status(200).send(Account);
   } catch (error) {
     console.log(
-      "🚀 -------------------------------------------------------------------------🚀"
-    );
-    console.log(
       "🚀 ~ file: Account.controller.js:22 ~ findAccountByName ~ error:",
       error
     );
-    console.log(
-      "🚀 -------------------------------------------------------------------------🚀"
-    );
+
     res.sendStatus(500);
   }
 };
@@ -42,30 +32,10 @@ const findAccountById = async (req, res) => {
 const createAccount = async (req, res) => {
   try {
     if (!req.body) return res.sendStatus(400);
-    console.log(
-      "🚀 -------------------------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: account.controller.js:45 ~ createAccount ~ req.body:",
-      req.body
-    );
-    console.log(
-      "🚀 -------------------------------------------------------------------------🚀"
-    );
     const Account = await AccountService.createAccount(req.body);
     if (!Account) return res.sendStatus(500);
     return res.status(200).send(Account);
   } catch (error) {
-    console.log(
-      "🚀 ---------------------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: Account.controller.js:43 ~ createAccount ~ error:",
-      error
-    );
-    console.log(
-      "🚀 ---------------------------------------------------------------------🚀"
-    );
     res.sendStatus(500);
   }
 };
@@ -81,36 +51,21 @@ const updateAccount = async (req, res) => {
     return res.status(200).send(updateAccount);
   } catch (error) {
     console.log(
-      "🚀 ---------------------------------------------------------------------🚀"
-    );
-    console.log(
       "🚀 ~ file: Account.controller.js:73 ~ updateAccount ~ error:",
       error
     );
-    console.log(
-      "🚀 ---------------------------------------------------------------------🚀"
-    );
+
     res.sendStatus(500);
   }
 };
 
 const updateLockAccount = async (req, res) => {
   try {
-    const id = req.body.id;
+    const id = req.params.id;
     const data = req.body.lockAccount;
     const Account = await AccountService.updateLockAccount(id, data);
     res.status(200).send(Account);
   } catch (error) {
-    console.log(
-      "🚀 -----------------------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: account.controller.js:94 ~ updateLockAccount ~ error:",
-      error
-    );
-    console.log(
-      "🚀 -----------------------------------------------------------------------🚀"
-    );
     res.sendStatus(500);
   }
 };

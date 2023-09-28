@@ -10,13 +10,6 @@ const register = async (req, res) => {
     if (!createAccount) return res.status(500).send("Internal server error");
     return res.status(200).send(createAccount);
   } catch (error) {
-    console.log(
-      "🚀 -----------------------------------------------------------🚀"
-    );
-    console.log("🚀 ~ file: auth.controller.js:12 ~ register ~ error:", error);
-    console.log(
-      "🚀 -----------------------------------------------------------🚀"
-    );
     res.sendStatus(500);
   }
 };
@@ -24,19 +17,11 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(
-      "🚀 --------------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: auth.controller.js:27 ~ login ~ password:",
-      typeof password
-    );
-    console.log(
-      "🚀 --------------------------------------------------------------🚀"
-    );
-    if (!email || !password) return res.status(422).send("Required !!!!");
+    if (!email || !password)
+      return res.status(422).send({ message: "Required !!!!" });
     const findAccount = await AccountService.findAccountByEmail(email);
-    if (!findAccount) return res.status(400).send("Account does not exists");
+    if (!findAccount)
+      return res.status(400).send({ message: "Account does not exists" });
     const payload = {
       id: findAccount._id,
       email: findAccount.email,
@@ -50,14 +35,23 @@ const login = async (req, res) => {
     );
 
     if (!passwordValid) {
-      return res.status(400).send("Password is incorrect");
+      return res.status(400).send({ message: "Password is incorrect" });
+    }
+
+    if (findAccount?.lockAccount) {
+      return res
+        .status(401)
+        .send({ message: "Account is Your account has been locked" });
     }
 
     const handleToken = await AccountService.createToken(payload);
     res.cookie("AccessToken", handleToken, { httpOnly: true });
-    return res
-      .status(200)
-      .send({ handleToken, payload, message: "login successful!!!!!" });
+    return res.status(200).send({
+      handleToken,
+      payload,
+      message: "login successful!!!!!",
+      status: 200,
+    });
   } catch (err) {
     return err;
   }
@@ -68,13 +62,7 @@ const logout = async (req, res) => {
     await res.clearCookie("AccessToken");
     return res.status(200).send("Logout successful!!!!!");
   } catch (error) {
-    console.log(
-      "🚀 ---------------------------------------------------------🚀"
-    );
     console.log("🚀 ~ file: auth.controller.js:52 ~ logout ~ error:", error);
-    console.log(
-      "🚀 ---------------------------------------------------------🚀"
-    );
   }
 };
 

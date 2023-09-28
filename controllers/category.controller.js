@@ -13,17 +13,36 @@ const getAllCategory = async (req, res) => {
   }
 };
 
-const findCategoryByName = async (req, res) => {
+const getCategoryInGuide = async (req, res) => {
+  try {
+    const categoriesInGuide = await CategoryService.getCategoryInGuide();
+    res.send(categoriesInGuide);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+};
+
+const getAllCategoriesNotInGuide = async (req, res) => {
+  try {
+    const categoriesInGuide =
+      await CategoryService.getAllCategoriesNotInGuide();
+    res.send(categoriesInGuide);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+};
+
+const findCategoryById = async (req, res) => {
   try {
     const id = req.params.id;
-    const category = await CategoryService.findCategoryByName(id);
+    const category = await CategoryService.findCategoryById(id);
     res.send(category);
   } catch (error) {
     console.log(
       "🚀 -------------------------------------------------------------------------🚀"
     );
     console.log(
-      "🚀 ~ file: category.controller.js:22 ~ findCategoryByName ~ error:",
+      "🚀 ~ file: category.controller.js:22 ~ findCategoryById ~ error:",
       error
     );
     console.log(
@@ -81,10 +100,7 @@ const updateCategory = async (req, res) => {
   try {
     if (!req.params.id) return res.sendStatus(400);
     if (!req.body) return res.sendStatus(400);
-    const updatecategory = await BookServices.updateCategory(
-      req.params.id,
-      req.body
-    );
+    await CategoryService.updateCategory(req.params.id, req.body);
     return res.status(200).send("update category successful");
   } catch (error) {
     console.log(
@@ -105,5 +121,7 @@ module.exports = {
   getAllCategory,
   updateCategory,
   deleteOneCategory,
-  findCategoryByName,
+  findCategoryById,
+  getCategoryInGuide,
+  getAllCategoriesNotInGuide,
 };

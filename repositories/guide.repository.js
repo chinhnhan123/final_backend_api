@@ -1,17 +1,21 @@
-const GuideModel = require("../database/models/guide");
+const GuideModel = require("../database/models/Guide");
 
 const createGuide = async (data) => {
   try {
-    const Guide = await GuideModel.create(data);
+    console.log(data);
+    const Guide = await GuideModel.insertMany(data);
+    console.log("Success");
     return Guide;
   } catch (err) {
-    console.log(
-      "🚀 --------------------------------------------------------🚀"
-    );
-    console.log("🚀 ~ file: Guide.repository.js:8 ~ createGuide ~ err:", err);
-    console.log(
-      "🚀 --------------------------------------------------------🚀"
-    );
+    return err;
+  }
+};
+
+const getAllCategoryInGuide = async () => {
+  try {
+    const Guide = GuideModel.distinct("idCategory");
+    return Guide;
+  } catch (err) {
     return err;
   }
 };
@@ -25,7 +29,7 @@ const getAllGuide = async () => {
       },
       {
         path: "idStage",
-        select: "_id nameStage",
+        select: "_id idStage nameStage",
       },
       {
         path: "idFood",
@@ -36,87 +40,68 @@ const getAllGuide = async () => {
         select: "_id nameMedicine",
       },
     ]);
-
-    console.log(Guide);
     return Guide;
   } catch (err) {
-    console.log(
-      "🚀 ---------------------------------------------------------🚀"
-    );
-    console.log("🚀 ~ file: Guide.repository.js:26 ~ getAllGuide ~ err:", err);
-    console.log(
-      "🚀 ---------------------------------------------------------🚀"
-    );
     return err;
   }
 };
 
-const updateGuide = async (id, data) => {
+const updateGuide = async (data) => {
   try {
-    const Guide = await GuideModel.updateOne(id, data);
-    return Guide;
+    for (const id in data) {
+      const dataToUpdate = data[id];
+      var result = await GuideModel.updateOne(
+        { _id: id },
+        { $set: dataToUpdate }
+      );
+      console.log(`Updated guide with id ${id}`);
+    }
+    return result;
   } catch (err) {
-    console.log(
-      "🚀 ---------------------------------------------------------🚀"
-    );
-    console.log("🚀 ~ file: Guide.repository.js:40 ~ updateGuide ~ err:", err);
-    console.log(
-      "🚀 ---------------------------------------------------------🚀"
-    );
     return err;
   }
 };
 
 const deleteGuide = async (id) => {
   try {
-    const Guide = await GuideModel.findOneAndRemove(id);
+    const Guide = await GuideModel.findOneAndRemove({ _id: id });
     return Guide;
   } catch (err) {
-    console.log(
-      "🚀 ---------------------------------------------------------🚀"
-    );
-    console.log("🚀 ~ file: Guide.repository.js:50 ~ deleteGuide ~ err:", err);
-    console.log(
-      "🚀 ---------------------------------------------------------🚀"
-    );
-
     return err;
   }
 };
 
 const findGuideByCategory = async (id) => {
   try {
-    const result = await GuideModel.findOne({ idCategory: id });
+    const result = await GuideModel.find({ idCategory: id }).populate([
+      {
+        path: "idCategory",
+        select: "_id nameCategory description",
+      },
+      {
+        path: "idStage",
+        select: "_id idStage nameStage description",
+      },
+      {
+        path: "idFood",
+        select: "_id nameFood urlImage description",
+      },
+      {
+        path: "idMedicine",
+        select: "_id nameMedicine types description instruction urlImage",
+      },
+    ]);
     return result;
   } catch (err) {
-    console.log(
-      "🚀 -------------------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: guide.repository.js:73 ~ findGuideByCategory ~ err:",
-      err
-    );
-    console.log(
-      "🚀 -------------------------------------------------------------------🚀"
-    );
     return err;
   }
 };
+
 const findGuideById = async (id) => {
   try {
-    const result = await GuideModel.findById(id);
+    const result = await GuideModel.findById({ _id: id });
     return result;
   } catch (err) {
-    console.log(
-      "🚀 -----------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: Guide.repository.js:67 ~ findGuideById ~ err:",
-      err
-    );
-    console.log(
-      "🚀 -----------------------------------------------------------🚀"
-    );
     return err;
   }
 };
@@ -128,4 +113,5 @@ module.exports = {
   deleteGuide,
   findGuideById,
   findGuideByCategory,
+  getAllCategoryInGuide,
 };
