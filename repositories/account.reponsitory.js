@@ -5,7 +5,7 @@ const createAccount = async (data) => {
     const Account = await AccountModel.create(data);
     return Account;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -15,7 +15,7 @@ const getAllAccount = async () => {
     // .sort({ createdAt: -1 });
     return Account;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -24,11 +24,7 @@ const updateAccount = async (id, data) => {
     const Account = await AccountModel.updateMany(id, data);
     return Account;
   } catch (err) {
-    console.log(
-      "🚀 ~ file: account.reponsitory.js:48 ~ updateAccount ~ err:",
-      err
-    );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -37,25 +33,19 @@ const findAccountById = async (id) => {
     const result = await AccountModel.findOne({ _id: id });
     return result;
   } catch (err) {
-    console.log(
-      "🚀 ~ file: account.reponsitory.js:86 ~ findAccountById ~ err:",
-      err
-    );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
 const updateLockAccount = async (id, data) => {
   try {
-    console.log("🚀 ~ file: account.reponsitory.js:54 ~ Account:", id);
     const Account = await AccountModel.updateOne(
       { _id: id },
       { $set: { lockAccount: data } }
     );
     return Account;
   } catch (err) {
-    // console.log("🚀 ~ file: account.reponsitory.js:58 ~ err:", err);
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -64,11 +54,7 @@ const findAccountByEmail = async (email) => {
     const result = await AccountModel.findOne({ email: email });
     return result;
   } catch (err) {
-    console.log(
-      "🚀 ~ file: account.reponsitory.js:86 ~ findAccountById ~ err:",
-      err
-    );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 

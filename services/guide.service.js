@@ -25,7 +25,7 @@ const createGuide = async (data) => {
     console.log("🚀 ~ file: Guide.service.js:8 ~ createGuide ~ err:", err);
     console.log("🚀 -----------------------------------------------------🚀");
 
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -35,7 +35,7 @@ const getAllCategoryInGuide = async () => {
     return result;
   } catch (err) {
     console.log("🚀 ~ file: guide.service.js:37 ~ err:", err);
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -51,7 +51,7 @@ const getAllGuide = async () => {
     console.log(
       "🚀 --------------------------------------------------------------🚀"
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -67,7 +67,7 @@ const updateGuide = async (data) => {
     console.log(
       "🚀 --------------------------------------------------------------🚀"
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -83,7 +83,7 @@ const deleteGuide = async (id) => {
     console.log(
       "🚀 -----------------------------------------------------------------🚀"
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -92,7 +92,7 @@ const findGuideById = async (id) => {
     const result = await GuideRepository.findGuideById(id);
     return result;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 const findGuideByCategory = async (id) => {
@@ -100,7 +100,7 @@ const findGuideByCategory = async (id) => {
     const result = await GuideRepository.findGuideByCategory(id);
     return result;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 

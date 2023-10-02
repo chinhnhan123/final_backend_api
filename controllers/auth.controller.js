@@ -53,7 +53,7 @@ const login = async (req, res) => {
       status: 200,
     });
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 

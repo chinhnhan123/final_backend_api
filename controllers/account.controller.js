@@ -17,6 +17,7 @@ const getAllAccount = async (req, res) => {
 const findAccountById = async (req, res) => {
   try {
     const id = req.params.id;
+    if (!id) return res.sendStatus(400);
     const Account = await AccountService.findAccountById(id);
     res.status(200).send(Account);
   } catch (error) {

@@ -12,7 +12,7 @@ const createMedicine = async (data) => {
     );
     console.log("🚀 -----------------------------------------------------🚀");
 
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -31,7 +31,7 @@ const getAllMedicine = async () => {
     console.log(
       "🚀 --------------------------------------------------------------🚀"
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -50,7 +50,7 @@ const updateMedicine = async (id, data) => {
     console.log(
       "🚀 --------------------------------------------------------------🚀"
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -69,7 +69,7 @@ const deleteOneMedicine = async (id) => {
     console.log(
       "🚀 -----------------------------------------------------------------🚀"
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -88,7 +88,7 @@ const findMedicineById = async (id) => {
     console.log(
       "🚀 ----------------------------------------------------------------🚀"
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 

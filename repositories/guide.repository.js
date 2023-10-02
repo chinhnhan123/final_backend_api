@@ -7,7 +7,7 @@ const createGuide = async (data) => {
     console.log("Success");
     return Guide;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -16,7 +16,7 @@ const getAllCategoryInGuide = async () => {
     const Guide = GuideModel.distinct("idCategory");
     return Guide;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -42,7 +42,7 @@ const getAllGuide = async () => {
     ]);
     return Guide;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -58,7 +58,7 @@ const updateGuide = async (data) => {
     }
     return result;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -67,7 +67,7 @@ const deleteGuide = async (id) => {
     const Guide = await GuideModel.findOneAndRemove({ _id: id });
     return Guide;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -93,7 +93,7 @@ const findGuideByCategory = async (id) => {
     ]);
     return result;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -102,7 +102,7 @@ const findGuideById = async (id) => {
     const result = await GuideModel.findById({ _id: id });
     return result;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 

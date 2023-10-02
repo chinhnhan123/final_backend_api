@@ -21,13 +21,6 @@ const WebSockets = (io) => {
     socket.on("addUser", (userId) => {
       addUser(userId, socket.id);
       io.emit("getUsers", users);
-      console.log(
-        "🚀 ---------------------------------------------------------🚀"
-      );
-      console.log("🚀 ~ file: WebSockets.js:22 ~ socket.on ~ userId:", users);
-      console.log(
-        "🚀 ---------------------------------------------------------🚀"
-      );
     });
 
     io.sockets.emit("allUsers", users);
@@ -36,6 +29,7 @@ const WebSockets = (io) => {
     socket.on("sendMessage", ({ senderId, receiverId, content }) => {
       const user = getUser(receiverId);
       if (user) {
+        console.log("🚀 ~ file: WebSockets.js:22 ~ socket.on ~ userId:", users);
         io.to(user.socketId).emit("getMessage", {
           senderId,
           content,
@@ -48,29 +42,12 @@ const WebSockets = (io) => {
       }
     });
 
-    // when call video
-
-    socket.emit("yourID", users);
-
-    socket.on("callUser", (data) => {
-      console.log("a user call.", data.userToCall, data.from);
-
-      socket.emit("hey", {
-        signal: data.signalData,
-        from: data.from,
-      });
+    // when disconnect
+    socket.on("disconnect", () => {
+      console.log("a user disconnected!");
+      removeUser(socket.id);
+      io.emit("getUsers", users);
     });
-
-    socket.on("acceptCall", (data) => {
-      io.to(data.to).emit("callAccepted", data.signal);
-    });
-
-    //when disconnect
-    // socket.on("disconnect", () => {
-    //   console.log("a user disconnected!");
-    //   removeUser(socket.id);
-    //   io.emit("getUsers", users);
-    // });
   });
 };
 

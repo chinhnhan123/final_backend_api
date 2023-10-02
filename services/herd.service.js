@@ -8,7 +8,7 @@ const createHerd = async (data) => {
     console.log("🚀 -----------------------------------------------------🚀");
     console.log("🚀 ~ file: Herd.service.js:8 ~ createHerd ~ err:", err);
     console.log("🚀 -----------------------------------------------------🚀");
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -18,7 +18,7 @@ const getAllHerd = async () => {
     return result;
   } catch (err) {
     console.log("🚀 ~ file: Herd.service.js:19 ~ err:", err);
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -28,7 +28,7 @@ const getAllHerdByAccountId = async (idAccount) => {
     return result;
   } catch (err) {
     console.log("🚀 ~ file: Herd.service.js:19 ~ err:", err);
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -37,7 +37,7 @@ const updateHerd = async (id, data) => {
     const result = await HerdRepository.updateHerd(id, data);
     return result;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -47,7 +47,7 @@ const deleteOneHerd = async (id) => {
     return result;
   } catch (err) {
     console.log("🚀 ~ file: herd.service.js:45 ~ err:", err);
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -57,7 +57,7 @@ const findHerdById = async (id) => {
     return result;
   } catch (err) {
     console.log("🚀 ~ file: herd.service.js:55 ~ err:", err);
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 

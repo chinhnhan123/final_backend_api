@@ -5,7 +5,7 @@ const createFood = async (data) => {
     const Food = await FoodModel.create(data);
     return Food;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -14,7 +14,7 @@ const getAllFood = async () => {
     const Food = await FoodModel.find();
     return Food;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -23,7 +23,7 @@ const updateFood = async (id, data) => {
     const Food = await FoodModel.updateMany({ _id: id }, data);
     return Food;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -32,7 +32,7 @@ const deleteFood = async (id) => {
     const Food = await FoodModel.findOneAndRemove({ _id: id });
     return Food;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -41,7 +41,7 @@ const findFoodById = async (id) => {
     const result = await FoodModel.findById({ _id: id });
     return result;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 

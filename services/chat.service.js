@@ -9,7 +9,7 @@ const createChat = async (data) => {
     console.log("🚀 ~ file: Chat.service.js:8 ~ createChat ~ err:", err);
     console.log("🚀 -----------------------------------------------------🚀");
 
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -25,7 +25,7 @@ const getChat = async (conversationId) => {
     console.log(
       "🚀 --------------------------------------------------------------🚀"
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -41,7 +41,7 @@ const updateChat = async (id, data) => {
     console.log(
       "🚀 --------------------------------------------------------------🚀"
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -57,7 +57,7 @@ const deleteOneChat = async (id) => {
     console.log(
       "🚀 -----------------------------------------------------------------🚀"
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -73,7 +73,7 @@ const findChatById = async (id) => {
     console.log(
       "🚀 ------------------------------------------------------------------🚀"
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 

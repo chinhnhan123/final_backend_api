@@ -26,7 +26,7 @@ const getAllCategoryInGuide = async (req, res) => {
     res.send(Guide);
   } catch (err) {
     console.log("🚀 ~ file: guide.controller.js:29 ~ err:", err);
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 

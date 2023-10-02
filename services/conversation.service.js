@@ -1,46 +1,29 @@
-const ConversationRepository = require("../repositories/Conversation.repository");
+const ConversationRepository = require("../repositories/conversation.repository");
 
 const createConversation = async (data) => {
   try {
     const result = await ConversationRepository.createConversation(data);
     return result;
   } catch (err) {
-    console.log("🚀 -----------------------------------------------------🚀");
-    console.log(
-      "🚀 ~ file: Conversation.service.js:8 ~ createConversation ~ err:",
-      err
-    );
-    console.log("🚀 -----------------------------------------------------🚀");
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
 const getAllConversation = async (idAccount) => {
   try {
     const result = await ConversationRepository.getAllConversation(idAccount);
-    console.log(
-      "🚀 ----------------------------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: Conversation.service.js:21 ~ getAllConversation ~ result:",
-      result
-    );
-    console.log(
-      "🚀 ----------------------------------------------------------------------------🚀"
-    );
     return result;
   } catch (err) {
-    console.log(
-      "🚀 --------------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: Conversation.service.js:27 ~ getAllConversation ~ err:",
-      err
-    );
-    console.log(
-      "🚀 --------------------------------------------------------------🚀"
-    );
-    return err;
+    console.log("🚀 ~ file err:", err);
+  }
+};
+
+const checkConversation = async (idAccounts) => {
+  try {
+    const result = await ConversationRepository.checkConversation(idAccounts);
+    return result;
+  } catch (err) {
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -59,7 +42,7 @@ const updateConversation = async (id, data) => {
     console.log(
       "🚀 --------------------------------------------------------------🚀"
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -78,7 +61,7 @@ const deleteOneConversation = async (id) => {
     console.log(
       "🚀 -----------------------------------------------------------------🚀"
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -97,7 +80,7 @@ const findConversationById = async (id) => {
     console.log(
       "🚀 ------------------------------------------------------------------🚀"
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -107,4 +90,5 @@ module.exports = {
   updateConversation,
   deleteOneConversation,
   findConversationById,
+  checkConversation,
 };

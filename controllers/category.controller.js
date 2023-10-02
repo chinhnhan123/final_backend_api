@@ -56,9 +56,20 @@ const createCategory = async (req, res) => {
   try {
     if (!req.body) return res.sendStatus(400);
     const category = await CategoryService.createCategory(req.body);
-    if (!category) return res.sendStatus(500);
-    return res.status(200).send(category);
+    if (!category)
+      return res.status(400).json({ message: "Create failed", status: 400 });
+
+    const response = {
+      data: category,
+      status: 200,
+    };
+    return res.status(200).json(response);
+    // if (!category) return res.sendStatus(500);
+    // return res.status(200).send(category);
   } catch (error) {
+    if (error.status === 500) {
+      return res.status(500).json({ message: error.message, status: 500 });
+    }
     console.log(
       "🚀 ---------------------------------------------------------------------🚀"
     );

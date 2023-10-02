@@ -6,7 +6,7 @@ const createCategory = async (data) => {
     const category = await CategoryModel.create(data);
     return category;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -17,29 +17,17 @@ const getAllCategory = async () => {
     // .sort({ createdAt: -1 });
     return category;
   } catch (err) {
-    console.log(
-      "🚀 ~ file: category.repository.js:19 ~ getAllCategory ~ err:",
-      err
-    );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
 const getCategoryInGuide = async () => {
   try {
     const categoryInGuideId = await GuideRepository.getAllCategoryInGuide();
-    console.log(
-      "🚀 ~ file: category.repository.js:31 ~ categoryInGuide:",
-      categoryInGuideId
-    );
     const category = await CategoryModel.find({ _id: categoryInGuideId });
     return category;
   } catch (err) {
-    console.log(
-      "🚀 ~ file: category.repository.js:19 ~ getAllCategory ~ err:",
-      err
-    );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -59,7 +47,7 @@ const getAllCategoriesNotInGuide = async () => {
       "🚀 ~ file: category.repository.js:19 ~ getAllCategory ~ err:",
       err
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -79,7 +67,7 @@ const updateCategory = async (id, data) => {
       "🚀 -----------------------------------------------------------------🚀"
     );
 
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -98,7 +86,7 @@ const deleteCategory = async (id) => {
     console.log(
       "🚀 -----------------------------------------------------------------🚀"
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -107,7 +95,7 @@ const findCategoryById = async (id) => {
     const result = await CategoryModel.findOne({ _id: id });
     return result;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 

@@ -9,7 +9,7 @@ const createAccount = async (data) => {
     const result = await AccountRepository.createAccount(data);
     return result;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -25,7 +25,7 @@ const getAllAccount = async () => {
     console.log(
       "🚀 --------------------------------------------------------------🚀"
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -41,7 +41,7 @@ const updateAccount = async (id, data) => {
     console.log(
       "🚀 --------------------------------------------------------------🚀"
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -54,7 +54,7 @@ const findAccountById = async (id) => {
       "🚀 ~ file: Account.service.js:84 ~ findAccountById ~ err:",
       err
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -63,7 +63,7 @@ const updateLockAccount = async (id, data) => {
     const result = await AccountRepository.updateLockAccount(id, data);
     return result;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -72,7 +72,7 @@ const findAccountByEmail = async (Email) => {
     const result = await AccountRepository.findAccountByEmail(Email);
     return result;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 

@@ -1,21 +1,14 @@
 const CategoryRepository = require("../repositories/category.repository");
 
-const createCategory = async (data) => {
+const createCategory = async (data, res) => {
   try {
     const result = await CategoryRepository.createCategory(data);
     return result;
   } catch (err) {
-    console.log(
-      "🚀 -------------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: category.service.js:8 ~ createCategory ~ err:",
-      err
-    );
-    console.log(
-      "🚀 -------------------------------------------------------------🚀"
-    );
-    return err;
+    if (err.status === 500) {
+      return res.status(500).json({ message: err.message, status: 500 });
+    }
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -29,7 +22,7 @@ const getAllCategory = async () => {
       err
     );
 
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -38,7 +31,7 @@ const getCategoryInGuide = async () => {
     const result = await CategoryRepository.getCategoryInGuide();
     return result;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -47,7 +40,7 @@ const getAllCategoriesNotInGuide = async () => {
     const result = await CategoryRepository.getAllCategoriesNotInGuide();
     return result;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -61,7 +54,7 @@ const updateCategory = async (id, data) => {
       err
     );
 
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -80,7 +73,7 @@ const deleteOneCategory = async (id) => {
     console.log(
       "🚀 -----------------------------------------------------------------🚀"
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -99,7 +92,7 @@ const findCategoryById = async (id) => {
     console.log(
       "🚀 ------------------------------------------------------------------🚀"
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 

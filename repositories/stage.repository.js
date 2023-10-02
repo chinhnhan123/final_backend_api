@@ -8,7 +8,7 @@ const getStage = async () => {
     console.log("🚀 -------------------------------------------------------🚀");
     console.log("🚀 ~ file: stage.repository.js:8 ~ getStage ~ err:", err);
     console.log("🚀 -------------------------------------------------------🚀");
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 

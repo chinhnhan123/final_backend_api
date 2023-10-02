@@ -7,28 +7,25 @@ const getAllConversation = async (req, res) => {
     const Conversation = await ConversationService.getAllConversation(
       idAccount
     );
-    console.log(
-      "🚀 ------------------------------------------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: conversation.controller.js:9 ~ getAllConversation ~ Conversation:",
-      Conversation
-    );
-    console.log(
-      "🚀 ------------------------------------------------------------------------------------------🚀"
-    );
     res.send(Conversation);
   } catch (error) {
-    console.log(
-      "🚀 ------------------------------------------------------------🚀"
+    res.sendStatus(500);
+  }
+};
+
+const checkConversation = async (req, res) => {
+  try {
+    const idAccounts = req.body;
+    const Conversation = await ConversationService.checkConversation(
+      idAccounts
     );
     console.log(
-      "🚀 ~ file: Conversation.controller.js:8 ~ getAllConversation ~ error:",
-      error
+      "🚀 ~ file: conversation.controller.js:22 ~ Conversation:",
+      Conversation
     );
-    console.log(
-      "🚀 ------------------------------------------------------------🚀"
-    );
+    res.status(200).send(Conversation);
+  } catch (error) {
+    console.log("🚀 ~ file: conversation.controller.js:25 ~ error:", error);
     res.sendStatus(500);
   }
 };
@@ -60,16 +57,6 @@ const createConversation = async (req, res) => {
     if (!Conversation) return res.sendStatus(500);
     return res.status(200).send(Conversation);
   } catch (error) {
-    console.log(
-      "🚀 ---------------------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: Conversation.controller.js:43 ~ createConversation ~ error:",
-      error
-    );
-    console.log(
-      "🚀 ---------------------------------------------------------------------🚀"
-    );
     res.sendStatus(500);
   }
 };
@@ -126,4 +113,5 @@ module.exports = {
   updateConversation,
   deleteOneConversation,
   findConversationById,
+  checkConversation,
 };

@@ -15,7 +15,18 @@ const createConversation = async (data) => {
     console.log(
       "🚀 --------------------------------------------------------🚀"
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
+  }
+};
+
+const checkConversation = async (idAccounts) => {
+  try {
+    const conversation = await ConversationModel.findOne({
+      idAccount: { $all: idAccounts.idAccount },
+    });
+    return !!conversation;
+  } catch (error) {
+    console.error("Lỗi khi kiểm tra cuộc trò chuyện:", error);
   }
 };
 
@@ -36,7 +47,7 @@ const getAllConversation = async (idAccount) => {
     console.log(
       "🚀 ---------------------------------------------------------🚀"
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -45,17 +56,7 @@ const updateConversation = async (id, data) => {
     const Conversation = await ConversationModel.updateMany({ _id: id }, data);
     return Conversation;
   } catch (err) {
-    console.log(
-      "🚀 ---------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: Conversation.repository.js:40 ~ updateConversation ~ err:",
-      err
-    );
-    console.log(
-      "🚀 ---------------------------------------------------------🚀"
-    );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -75,7 +76,7 @@ const deleteConversation = async (id) => {
       "🚀 ---------------------------------------------------------🚀"
     );
 
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -84,17 +85,7 @@ const findConversationById = async (id) => {
     const result = await ConversationModel.findById({ _id: id });
     return result;
   } catch (err) {
-    console.log(
-      "🚀 -----------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: Conversation.repository.js:67 ~ findConversationById ~ err:",
-      err
-    );
-    console.log(
-      "🚀 -----------------------------------------------------------🚀"
-    );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -104,4 +95,5 @@ module.exports = {
   updateConversation,
   deleteConversation,
   findConversationById,
+  checkConversation,
 };

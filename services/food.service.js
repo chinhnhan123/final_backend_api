@@ -5,7 +5,7 @@ const createFood = async (data) => {
     const result = await FoodRepository.createFood(data);
     return result;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -14,7 +14,7 @@ const getAllFood = async () => {
     const result = await FoodRepository.getAllFood();
     return result;
   } catch (err) {
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -30,7 +30,7 @@ const updateFood = async (id, data) => {
     console.log(
       "🚀 --------------------------------------------------------------🚀"
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -46,7 +46,7 @@ const deleteOneFood = async (id) => {
     console.log(
       "🚀 -----------------------------------------------------------------🚀"
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -62,7 +62,7 @@ const findFoodById = async (id) => {
     console.log(
       "🚀 ------------------------------------------------------------------🚀"
     );
-    return err;
+    console.log("🚀 ~ file err:", err);
   }
 };
 
