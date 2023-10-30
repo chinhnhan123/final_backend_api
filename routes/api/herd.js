@@ -7,7 +7,7 @@ const upload = multer({ dest: "public/uploads/" });
 
 router.get("/", HerdController.getAllHerd);
 
-router.get("/:idAccount", HerdController.getAllHerdByAccountId);
+router.get("/by-account/:idAccount", HerdController.getAllHerdByAccountId);
 
 router.get("/:id", HerdController.findHerdById);
 

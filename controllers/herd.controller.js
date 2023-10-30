@@ -3,7 +3,9 @@ const handleUploadImage = require("../utilities/uploadImage");
 
 const getAllHerd = async (req, res) => {
   try {
-    const Herd = await HerdService.getAllHerd();
+    const { page = 1, limit = 5, searchTerm = "" } = req.query;
+    const options = { page, limit };
+    const Herd = await HerdService.getAllHerd(options, searchTerm);
     res.send(Herd);
   } catch (error) {
     console.log("🚀 ~ file: Herd.controller.js:9 ~ error:", error);

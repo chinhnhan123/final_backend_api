@@ -12,9 +12,9 @@ const createHerd = async (data) => {
   }
 };
 
-const getAllHerd = async () => {
+const getAllHerd = async (options, searchTerm) => {
   try {
-    const result = await HerdRepository.getAllHerd();
+    const result = await HerdRepository.getAllHerd(options, searchTerm);
     return result;
   } catch (err) {
     console.log("🚀 ~ file: Herd.service.js:19 ~ err:", err);

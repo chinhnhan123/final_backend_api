@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate-v2");
 
 const { Schema } = mongoose;
 
@@ -26,6 +27,8 @@ const PigsSchema = new Schema(
   },
   { timestamps: true }
 );
+
+PigsSchema.plugin(mongoosePaginate);
 
 const Pigs = mongoose.model("Pigs", PigsSchema);
 

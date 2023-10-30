@@ -32,6 +32,14 @@ const AccountSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    urlImage: {
+      type: String,
+      default: "",
+    },
+    vip: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

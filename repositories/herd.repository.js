@@ -10,10 +10,80 @@ const createHerd = async (data) => {
   }
 };
 
-const getAllHerd = async () => {
+const getAllHerd = async (options, searchTerm) => {
   try {
-    const Herd = await HerdModel.find().populate("idAccount idCategory");
-    return Herd;
+    const where = {};
+    if (searchTerm) {
+      where.$or = [
+        {
+          "accountInfo.fullName": {
+            $regex: `.*${searchTerm}.*`,
+            $options: "i",
+          },
+        },
+        {
+          "categoryInfo.nameCategory": {
+            $regex: `.*${searchTerm}.*`,
+            $options: "i",
+          },
+        },
+      ];
+    }
+    const { page, limit } = options;
+    const skip = limit && page ? limit * (page - 1) : 0;
+    const [data, totalRecords] = await Promise.all([
+      HerdModel.aggregate([
+        {
+          $lookup: {
+            from: "accounts",
+            localField: "idAccount",
+            foreignField: "_id",
+            as: "accountInfo",
+          },
+        },
+        {
+          $lookup: {
+            from: "categories",
+            localField: "idCategory",
+            foreignField: "_id",
+            as: "categoryInfo",
+          },
+        },
+        {
+          $match: {
+            ...where,
+          },
+        },
+        { $skip: skip },
+        { $limit: limit },
+        {
+          $project: {
+            name: 1,
+            quantity: 1,
+            urlImage: 1,
+            createdAt: 1,
+            "accountInfo.email": 1,
+            "accountInfo.fullName": 1,
+            "accountInfo.address": 1,
+            "accountInfo._id": 1,
+            "categoryInfo.nameCategory": 1,
+          },
+        },
+      ]),
+      HerdModel.countDocuments(),
+    ]);
+    // console.log("🚀 ~ file: herd.repository.js:19 ~ data", data);
+
+    const hasNextPage = skip + data.length < totalRecords ? true : false;
+    const totalPages = Math.ceil(totalRecords / limit);
+    const result = {
+      data,
+      page,
+      totalDocs: totalRecords,
+      totalPages,
+      hasNextPage,
+    };
+    return result;
   } catch (err) {
     console.log("🚀 ~ file: herd.repository.js:19 ~ err:", err);
     console.log("🚀 ~ file err:", err);
