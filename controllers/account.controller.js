@@ -1,4 +1,5 @@
 const AccountService = require("../services/account.service");
+const handleUploadImage = require("../utilities/uploadImage");
 
 const getAllAccount = async (req, res) => {
   try {
@@ -45,7 +46,7 @@ const updateAccount = async (req, res) => {
   try {
     if (!req.params.id) return res.sendStatus(400);
     if (!req.body) return res.sendStatus(400);
-    const updateAccount = await BookServices.updateAccount(
+    const updateAccount = await AccountService.updateAccount(
       req.params.id,
       req.body
     );
@@ -55,7 +56,6 @@ const updateAccount = async (req, res) => {
       "🚀 ~ file: Account.controller.js:73 ~ updateAccount ~ error:",
       error
     );
-
     res.sendStatus(500);
   }
 };
@@ -71,10 +71,35 @@ const updateLockAccount = async (req, res) => {
   }
 };
 
+const updateAvatar = async (req, res) => {
+  try {
+    if (!req.params.id || !req.body) return res.sendStatus(400);
+    let img = "";
+    if (req?.file?.path) {
+      img = await handleUploadImage(req.file.path);
+    } else {
+      img = req.body.img;
+    }
+    console.log(
+      "🚀 ~ file: account.controller.js:81 ~ updateAvatar ~ img:",
+      img
+    );
+    const Account = await AccountService.updateAvatar(req.params.id, img);
+    res.status(200).send(Account);
+  } catch (error) {
+    console.log(
+      "🚀 ~ file: account.controller.js:89 ~ updateAvatar ~ error:",
+      error
+    );
+    res.sendStatus(500);
+  }
+};
+
 module.exports = {
   createAccount,
   getAllAccount,
   updateAccount,
   findAccountById,
   updateLockAccount,
+  updateAvatar,
 };

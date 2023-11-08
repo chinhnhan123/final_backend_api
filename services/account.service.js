@@ -67,6 +67,15 @@ const updateLockAccount = async (id, data) => {
   }
 };
 
+const updateAvatar = async (id, data) => {
+  try {
+    const result = await AccountRepository.updateAvatar(id, data);
+    return result;
+  } catch (err) {
+    console.log("🚀 ~ file err:", err);
+  }
+};
+
 const findAccountByEmail = async (Email) => {
   try {
     const result = await AccountRepository.findAccountByEmail(Email);
@@ -81,26 +90,14 @@ const checkPasswordSer = async (email, password) => {
     const result = await AccountRepository.findAccountByEmail(email);
     const isValidPassword = await checkPassword(password, result.password);
     console.log(
-      "🚀 ----------------------------------------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: account.service.js:116 ~ checkPasswordSer ~ isValidPassword:",
-      typeof isValidPassword
-    );
-    console.log(
-      "🚀 ----------------------------------------------------------------------------------------🚀"
+      "🚀 ~ file: account.service.js:92 ~ checkPasswordSer ~ isValidPassword:",
+      isValidPassword
     );
     return isValidPassword;
   } catch (error) {
     console.log(
-      "🚀 ------------------------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: account.reponsitory.js:123 ~ checkPasswordRes ~ error:",
+      "🚀 ~ file: account.service.js:95 ~ checkPasswordSer ~ error:",
       error
-    );
-    console.log(
-      "🚀 ------------------------------------------------------------------------🚀"
     );
     return error;
   }
@@ -112,14 +109,8 @@ const createToken = async (payload) => {
     return token;
   } catch (error) {
     console.log(
-      "🚀 ---------------------------------------------------------------🚀"
-    );
-    console.log(
-      "🚀 ~ file: account.service.js:129 ~ createToken ~ error:",
+      "🚀 ~ file: account.service.js:111 ~ createToken ~ error:",
       error
-    );
-    console.log(
-      "🚀 ---------------------------------------------------------------🚀"
     );
     return error;
   }
@@ -134,4 +125,5 @@ module.exports = {
   findAccountByEmail,
   checkPasswordSer,
   createToken,
+  updateAvatar,
 };

@@ -49,6 +49,18 @@ const updateLockAccount = async (id, data) => {
   }
 };
 
+const updateAvatar = async (id, data) => {
+  try {
+    const Account = await AccountModel.updateOne(
+      { _id: id },
+      { $set: { urlImage: data } }
+    );
+    return Account;
+  } catch (err) {
+    console.log("🚀 ~ file err:", err);
+  }
+};
+
 const findAccountByEmail = async (email) => {
   try {
     const result = await AccountModel.findOne({ email: email });
@@ -65,4 +77,5 @@ module.exports = {
   updateLockAccount,
   findAccountById,
   findAccountByEmail,
+  updateAvatar,
 };
