@@ -5,6 +5,8 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors");
+const swaggerJSDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
 const http = require("http");
 const socketio = require("socket.io");
 const database = require("./database/connect");
@@ -25,7 +27,36 @@ const io = socketio(server, {
     origin: "http://localhost:3000",
   },
 });
+
+const swaggerDefinition = {
+  openapi: "3.0.0",
+  info: {
+    title: "API for PigCare App",
+    description: "This is a REST API application made with Express.",
+    version: "1.0.0",
+  },
+  servers: [
+    {
+      url: "http://localhost:4000",
+    },
+  ],
+};
+
+const options = {
+  swaggerDefinition,
+  apis: ["./routes/api/*.js"],
+};
+
+const swaggerSpec = swaggerJSDoc(options);
+
+app.use(
+  "/docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpec, { explorer: true })
+);
+
 WebSockets(io);
+
 route(app);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

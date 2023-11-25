@@ -6,6 +6,47 @@ const getAllAccount = async (req, res) => {
     const Account = await AccountService.getAllAccount();
     res.status(200).send(Account);
   } catch (error) {
+    res.sendStatus(500);
+  }
+};
+
+const totalAccountVIP = async (req, res) => {
+  try {
+    const Account = await AccountService.totalAccountVIP();
+    res.status(200).send(Account);
+  } catch (error) {
+    console.log(
+      "🚀 ~ file: Account.controller.js:8 ~ getAllAccount ~ error:",
+      error
+    );
+
+    res.sendStatus(500);
+  }
+};
+
+const totalAccountFarmer = async (req, res) => {
+  try {
+    const Account = await AccountService.totalAccountFarmer();
+    console.log(
+      "🚀 ~ file: account.controller.js:35 ~ totalAccountFarmer ~ Account:",
+      Account
+    );
+    res.status(200).send(Account);
+  } catch (error) {
+    console.log(
+      "🚀 ~ file: Account.controller.js:8 ~ getAllAccount ~ error:",
+      error
+    );
+
+    res.sendStatus(500);
+  }
+};
+
+const totalAccountTrader = async (req, res) => {
+  try {
+    const Account = await AccountService.totalAccountTrader();
+    res.status(200).send(Account);
+  } catch (error) {
     console.log(
       "🚀 ~ file: Account.controller.js:8 ~ getAllAccount ~ error:",
       error
@@ -37,6 +78,16 @@ const createAccount = async (req, res) => {
     const Account = await AccountService.createAccount(req.body);
     if (!Account) return res.sendStatus(500);
     return res.status(200).send(Account);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+};
+
+const updateVIPAccount = async (req, res) => {
+  try {
+    if (!req.params.id) return res.sendStatus(400);
+    const Account = await AccountService.updateVIPAccount(req.params.id);
+    res.status(200).send(Account);
   } catch (error) {
     res.sendStatus(500);
   }
@@ -102,4 +153,8 @@ module.exports = {
   findAccountById,
   updateLockAccount,
   updateAvatar,
+  updateVIPAccount,
+  totalAccountVIP,
+  totalAccountFarmer,
+  totalAccountTrader,
 };

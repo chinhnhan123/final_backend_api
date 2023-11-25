@@ -72,7 +72,6 @@ const getAllHerd = async (options, searchTerm) => {
       ]),
       HerdModel.countDocuments(),
     ]);
-    // console.log("🚀 ~ file: herd.repository.js:19 ~ data", data);
 
     const hasNextPage = skip + data.length < totalRecords ? true : false;
     const totalPages = Math.ceil(totalRecords / limit);
@@ -86,7 +85,6 @@ const getAllHerd = async (options, searchTerm) => {
     return result;
   } catch (err) {
     console.log("🚀 ~ file: herd.repository.js:19 ~ err:", err);
-    console.log("🚀 ~ file err:", err);
   }
 };
 
@@ -98,7 +96,6 @@ const getAllHerdByAccountId = async (idAccount) => {
     return Herd;
   } catch (err) {
     console.log("🚀 ~ file: herd.repository.js:19 ~ err:", err);
-    console.log("🚀 ~ file err:", err);
   }
 };
 

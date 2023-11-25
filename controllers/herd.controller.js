@@ -3,7 +3,7 @@ const handleUploadImage = require("../utilities/uploadImage");
 
 const getAllHerd = async (req, res) => {
   try {
-    const { page = 1, limit = 5, searchTerm = "" } = req.query;
+    const { page = 1, limit = 10, searchTerm = "" } = req.query;
     const options = { page, limit };
     const Herd = await HerdService.getAllHerd(options, searchTerm);
     res.send(Herd);

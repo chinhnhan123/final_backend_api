@@ -29,6 +29,51 @@ const getAllAccount = async () => {
   }
 };
 
+const totalAccountVIP = async () => {
+  try {
+    const result = await AccountRepository.totalAccountVIP();
+    return result;
+  } catch (err) {
+    console.log(
+      "🚀 --------------------------------------------------------------🚀"
+    );
+    console.log("🚀 ~ file: Account.service.js:27 ~ getAllAccount ~ err:", err);
+    console.log(
+      "🚀 --------------------------------------------------------------🚀"
+    );
+    console.log("🚀 ~ file err:", err);
+  }
+};
+
+const totalAccountFarmer = async () => {
+  try {
+    const result = await AccountRepository.totalAccountFarmer();
+    console.log(
+      "🚀 ~ file: account.service.js:51 ~ totalAccountFarmer ~ result:",
+      result
+    );
+    return result;
+  } catch (err) {
+    console.log("🚀 ~ file err:", err);
+  }
+};
+
+const totalAccountTrader = async () => {
+  try {
+    const result = await AccountRepository.totalAccountTrader();
+    return result;
+  } catch (err) {
+    console.log(
+      "🚀 --------------------------------------------------------------🚀"
+    );
+    console.log("🚀 ~ file: Account.service.js:27 ~ getAllAccount ~ err:", err);
+    console.log(
+      "🚀 --------------------------------------------------------------🚀"
+    );
+    console.log("🚀 ~ file err:", err);
+  }
+};
+
 const updateAccount = async (id, data) => {
   try {
     const result = await AccountRepository.updateAccount(id, data);
@@ -61,6 +106,15 @@ const findAccountById = async (id) => {
 const updateLockAccount = async (id, data) => {
   try {
     const result = await AccountRepository.updateLockAccount(id, data);
+    return result;
+  } catch (err) {
+    console.log("🚀 ~ file err:", err);
+  }
+};
+
+const updateVIPAccount = async (id) => {
+  try {
+    const result = await AccountRepository.updateVIPAccount(id);
     return result;
   } catch (err) {
     console.log("🚀 ~ file err:", err);
@@ -126,4 +180,8 @@ module.exports = {
   checkPasswordSer,
   createToken,
   updateAvatar,
+  updateVIPAccount,
+  totalAccountVIP,
+  totalAccountFarmer,
+  totalAccountTrader,
 };

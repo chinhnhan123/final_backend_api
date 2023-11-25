@@ -29,6 +29,7 @@ const login = async (req, res) => {
       role: findAccount.role,
       phoneNumber: findAccount.phoneNumber,
       address: findAccount.address,
+      vip: findAccount.vip,
     };
 
     const passwordValid = await AccountService.checkPasswordSer(
